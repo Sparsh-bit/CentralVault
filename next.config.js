@@ -16,6 +16,12 @@ const nextConfig = {
         NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
         NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key',
     },
+    webpack: (config, { dev }) => {
+        if (!dev) {
+            config.cache = false;
+        }
+        return config;
+    },
 };
 
 module.exports = nextConfig;
