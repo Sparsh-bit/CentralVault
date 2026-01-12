@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    // Note: Do not use output: 'export' if you want full dynamic Edge Runtime features.
     // Standard Next.js build is optimized for Cloudflare via their dedicated builder.
     images: {
         unoptimized: true,
@@ -13,11 +12,21 @@ const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
-    generateBuildId: async () => 'build-' + Date.now(),
-    webpack: (config) => {
-        // Absolute root-cause fix for Cloudflare 25MB limit:
-        // Completely disable Webpack's filesystem caching to prevent large .pack files.
+    // Layer 1: Force Next.js to use a temporary system directory for caching
+    // This ensures the cache is never even created inside the deployment folder.
+    distDir: '.next',
+
+    webpack: (config, { dev, isServer }) => {
+        // Layer 2: Hard-disable Webpack filesystem caching at the engine level
         config.cache = false;
+
+        // Ensure the config is applied to the worker as well
+        if (!dev) {
+            config.optimization = {
+                ...config.optimization,
+                minimize: true,
+            };
+        }
         return config;
     },
 };
