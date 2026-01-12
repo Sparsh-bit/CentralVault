@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_PRIVATE_LOCAL_WEBPACK_CACHE=0 next build && rm -rf .next/cache",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export",
