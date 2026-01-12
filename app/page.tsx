@@ -1,13 +1,16 @@
 
 'use client';
 
+export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
+
 import Link from 'next/link';
 import { ArrowRight, Vault, Share2, Zap, Lock, Database } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import { GlowingCard } from './components/GlowingCard';
 import { useState, useEffect } from 'react';
 
-const ThreeScene = dynamic(() => import('./components/ThreeScene').then(mod => mod.ThreeScene), {
+const ThreeScene = nextDynamic(() => import('./components/ThreeScene').then(mod => mod.ThreeScene), {
     ssr: false,
 });
 
