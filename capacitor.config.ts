@@ -1,17 +1,14 @@
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
     appId: 'com.centralvault.app',
-    appName: 'Central Vault',
-    webDir: 'public',
+    appName: 'CentralVault',
+    webDir: 'out', // Static export output directory
     server: {
-        // Ideally, this points to your deployed Vercel URL for the live app
-        // e.g., 'https://central-vault.vercel.app'
-        // For local dev, you can use your local IP
         androidScheme: 'https',
+        hostname: 'centralvault.pages.dev',
         allowNavigation: [
-            'central-vault.vercel.app', // Update with actual domain
+            'centralvault.pages.dev',
             '*.supabase.co',
             '*.googleusercontent.com'
         ]
@@ -19,7 +16,7 @@ const config: CapacitorConfig = {
     plugins: {
         SplashScreen: {
             launchShowDuration: 2000,
-            backgroundColor: "#ffffff",
+            backgroundColor: '#050511', // Match your app's dark theme
             showSpinner: false,
         },
     },
