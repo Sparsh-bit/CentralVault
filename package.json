@@ -1,6 +1,8 @@
 {
   "name": "central-vault",
   "version": "4.0.0",
+  "description": "Professional Knowledge Hub and Secure Vault",
+  "author": "Sparsh Sharma",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -19,17 +21,32 @@
   "build": {
     "appId": "com.centralvault.app",
     "productName": "CentralVault",
+    "asar": true,
+    "directories": {
+      "output": "dist-electron",
+      "buildResources": "public"
+    },
     "win": {
-      "target": "nsis",
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "public/favicon.png"
     },
-    "directories": {
-      "output": "dist-electron"
-    },
     "files": [
+      "!**/*",
       "electron-main.js",
+      "package.json",
       "public/**/*"
-    ]
+    ],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "installerIcon": "public/favicon.png",
+      "uninstallerIcon": "public/favicon.png",
+      "deleteAppDataOnUninstall": true
+    }
   },
   "dependencies": {
     "@capacitor/android": "^5.6.0",
