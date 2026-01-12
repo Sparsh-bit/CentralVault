@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    // Enable Static Export for maximum Cloudflare compatibility
-    output: 'export',
-    // Ensure images from external sources (like YouTube thumbnails) work
     images: {
-        unoptimized: true, // Required for static export
+        unoptimized: true,
         domains: ['img.youtube.com', 'i.vimeocdn.com'],
     },
     eslint: {
@@ -14,16 +11,11 @@ const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
-    env: {
-        NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key',
-    },
     webpack: (config) => {
+        // Professional resolution for Cloudflare 25MB limit: 
+        // Completely disable filesystem caching during production builds.
         config.cache = false;
         return config;
-    },
-    generateBuildId: async () => {
-        return 'build-' + Date.now();
     },
 };
 
