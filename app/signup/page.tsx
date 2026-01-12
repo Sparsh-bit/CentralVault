@@ -1,8 +1,5 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-
 import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';

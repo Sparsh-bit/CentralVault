@@ -6,9 +6,6 @@
 
 'use client';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { ResourceCard } from '@/app/components/resource-card';
