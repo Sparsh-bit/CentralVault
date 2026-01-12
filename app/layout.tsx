@@ -4,6 +4,8 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
     title: "CentralVault | Professional Resource Manager",
     description: "Secure, enterprise-grade personal knowledge vault for links, notes, and tasks.",
