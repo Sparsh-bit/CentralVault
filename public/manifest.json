@@ -1,0 +1,16 @@
+{
+    "name": "CentralVault",
+    "short_name": "Vault",
+    "description": "Professional Resource Manager",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050511",
+    "theme_color": "#6366f1",
+    "icons": [
+        {
+            "src": "/favicon.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        }
+    ]
+}

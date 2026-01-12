@@ -1,0 +1,26 @@
+
+<!-- 
+  INSTRUCTIONS FOR ANDROID MANIFEST (Layer 15)
+  Add these intent filters to your AndroidManifest.xml inside the <activity> tag
+  to enable receiving shared content from other apps.
+-->
+
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="text/plain" />
+</intent-filter>
+
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="image/*" />
+</intent-filter>
+
+<!-- Deep Link Handling so app opens /share page -->
+<intent-filter android:autoVerify="true">
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="https" android:host="central-vault.vercel.app" android:pathPrefix="/share" />
+</intent-filter>
