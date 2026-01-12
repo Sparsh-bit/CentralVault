@@ -14,11 +14,10 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
     generateBuildId: async () => 'build-' + Date.now(),
-    webpack: (config, { dev, isServer }) => {
-        // Absolute root-cause fix for Cloudflare 25MB limit
-        if (!dev) {
-            config.cache = false;
-        }
+    webpack: (config) => {
+        // Absolute root-cause fix for Cloudflare 25MB limit:
+        // Completely disable Webpack's filesystem caching to prevent large .pack files.
+        config.cache = false;
         return config;
     },
 };
