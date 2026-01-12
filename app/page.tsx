@@ -87,15 +87,15 @@ export default function LandingPage() {
 
                         <div className="flex items-center gap-6 pt-8 border-t border-white/5">
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-black uppercase text-purple-400 tracking-widest mb-2">Desktop Client</span>
-                                <a
-                                    href="/downloads/CentralVault-Setup.exe"
+                                <span className="text-[10px] font-black uppercase text-purple-400 tracking-widest mb-2">Desktop App</span>
+                                <Link
+                                    href="/install"
                                     className="flex items-center gap-2 text-white hover:text-purple-400 transition-colors text-sm font-bold group"
                                 >
                                     <Monitor className="w-4 h-4" />
-                                    Download for Windows
-                                    <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-purple-500/30 transition-colors">.exe</span>
-                                </a>
+                                    Install for Windows
+                                    <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-purple-500/30 transition-colors">PWA</span>
+                                </Link>
                             </div>
                         </div>
                     </div>

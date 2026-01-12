@@ -11,7 +11,7 @@
     "lint": "next lint",
     "export": "next build && next export",
     "electron:dev": "electron .",
-    "electron:build": "electron-builder build --win",
+    "electron:build": "npx electron-builder build --win",
     "mobile:init": "npx cap init",
     "mobile:add": "npx cap add android",
     "mobile:sync": "npx cap sync",
@@ -21,32 +21,17 @@
   "build": {
     "appId": "com.centralvault.app",
     "productName": "CentralVault",
-    "asar": true,
     "directories": {
-      "output": "dist-electron",
-      "buildResources": "public"
+      "output": "dist-electron"
     },
     "win": {
-      "target": [
-        "portable",
-        "zip"
-      ],
-      "icon": "public/favicon.png"
+      "target": "dir"
     },
     "files": [
-      "!**/*",
       "electron-main.js",
       "package.json",
-      "public/**/*"
-    ],
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "installerIcon": "public/favicon.png",
-      "uninstallerIcon": "public/favicon.png",
-      "deleteAppDataOnUninstall": true
-    }
+      "public/favicon.png"
+    ]
   },
   "dependencies": {
     "@capacitor/android": "^5.6.0",
@@ -73,8 +58,6 @@
     "@types/react-dom": "^18.2.18",
     "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.4.17",
-    "electron": "^39.2.7",
-    "electron-builder": "^26.4.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
     "postcss": "^8.4.33",
