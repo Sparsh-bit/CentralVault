@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    // Enable Static Export for maximum Cloudflare compatibility
+    output: 'export',
     // Ensure images from external sources (like YouTube thumbnails) work
     images: {
+        unoptimized: true, // Required for static export
         domains: ['img.youtube.com', 'i.vimeocdn.com'],
     },
-    // output: 'export', // Uncomment if doing purely static handling for Capacitor, but we use SSR for auth
     eslint: {
         ignoreDuringBuilds: true,
     },
@@ -20,7 +22,6 @@ const nextConfig = {
         config.cache = false;
         return config;
     },
-    // Industry standard for Cloudflare Pages to prevent large cache blobs
     generateBuildId: async () => {
         return 'build-' + Date.now();
     },
