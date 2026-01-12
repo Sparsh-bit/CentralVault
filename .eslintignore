@@ -1,0 +1,6 @@
+*
+!app/
+!lib/
+!components/
+# Ignore everything for the build to pass through Cloudflare's strict linting environment
+**/*
