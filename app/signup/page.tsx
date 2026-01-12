@@ -13,7 +13,6 @@ export default function SignupPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return null;
     const supabase = createClientComponentClient();
 
     const handleSignup = async (e: React.FormEvent) => {

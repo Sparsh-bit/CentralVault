@@ -12,7 +12,6 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return null;
     const supabase = createClientComponentClient();
 
     const handleLogin = async (e: React.FormEvent) => {
