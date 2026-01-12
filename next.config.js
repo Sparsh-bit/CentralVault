@@ -3,6 +3,7 @@ const nextConfig = {
     // Static export for Cloudflare Pages - this is the professional standard
     // for client-side apps with external APIs (like Supabase)
     output: 'export',
+    distDir: 'out',
 
     reactStrictMode: true,
 
