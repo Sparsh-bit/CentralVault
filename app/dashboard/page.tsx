@@ -31,6 +31,16 @@ export default function Dashboard() {
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    // Failsafe for build-time initialization
+    if (!supabaseUrl || !supabaseKey) {
+        if (typeof window === 'undefined') {
+            console.warn('Supabase env vars missing during build runtime.');
+        }
+    }
+
     const supabase = createClientComponentClient();
     const router = useRouter();
 
