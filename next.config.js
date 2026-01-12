@@ -5,12 +5,14 @@
 if (process.env.NEXT_PRIVATE_STANDALONE) {
     delete process.env.NEXT_PRIVATE_STANDALONE;
 }
+if (process.env.NEXT_PRIVATE_LOCAL_WEBPACK_CACHE) {
+    delete process.env.NEXT_PRIVATE_LOCAL_WEBPACK_CACHE;
+}
 
 const nextConfig = {
     // Static export for Cloudflare Pages - this is the professional standard
     // for client-side apps with external APIs (like Supabase)
     output: 'export',
-    distDir: 'out',
 
     reactStrictMode: true,
 
