@@ -1,11 +1,7 @@
 
 // Component: Professional Share Target
 // Handles shared content from mobile apps or extensions
-
 'use client';
-
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
 
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';

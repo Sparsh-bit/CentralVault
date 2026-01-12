@@ -1,8 +1,4 @@
-
 'use client';
-
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
 
 import Link from 'next/link';
 import { ArrowRight, Vault, Share2, Zap, Lock, Database } from 'lucide-react';
