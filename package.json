@@ -28,8 +28,8 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "portable"
+        "portable",
+        "zip"
       ],
       "icon": "public/favicon.png"
     },

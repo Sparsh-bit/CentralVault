@@ -13,10 +13,12 @@ const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
-    webpack: (config) => {
-        // Essential for Cloudflare Pages: Prevent large cache pack files
-        // This solves the "Pages only supports files up to 25 MiB" error
-        config.cache = false;
+    generateBuildId: async () => 'build-' + Date.now(),
+    webpack: (config, { dev, isServer }) => {
+        // Absolute root-cause fix for Cloudflare 25MB limit
+        if (!dev) {
+            config.cache = false;
+        }
         return config;
     },
 };
