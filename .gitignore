@@ -13,6 +13,12 @@
 # Production
 /build
 
+# Electron builds
+/dist-electron
+*.exe
+*.zip
+*.blockmap
+
 # Misc
 .DS_Store
 *.pem
