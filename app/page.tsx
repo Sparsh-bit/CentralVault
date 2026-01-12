@@ -152,6 +152,41 @@ export default function LandingPage() {
                 </div>
             </section>
 
+            {/* Mobile App Section */}
+            <section className="py-24 relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-indigo-600/10 rounded-full blur-[120px] -z-10" />
+                <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-8">
+                        <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">Cross-Platform</span>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Take Your Vault Anywhere.</h2>
+                    <p className="text-xl text-gray-400 max-w-2xl mb-12">
+                        Our upcoming mobile app connects directly to your vault in real-time.
+                        Capture insights on the go and find them instantly on your desktop.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-6">
+                        <div className="px-8 py-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-4 group hover:bg-white/10 transition-all cursor-not-allowed grayscale">
+                            <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                                <span className="text-xl font-bold">A</span>
+                            </div>
+                            <div className="text-left">
+                                <p className="text-[10px] text-gray-500 uppercase font-black">Coming to</p>
+                                <p className="text-sm font-bold">App Store</p>
+                            </div>
+                        </div>
+                        <div className="px-8 py-4 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-4 group hover:bg-white/10 transition-all cursor-not-allowed grayscale">
+                            <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
+                                <span className="text-xl font-bold">P</span>
+                            </div>
+                            <div className="text-left">
+                                <p className="text-[10px] text-gray-500 uppercase font-black">Coming to</p>
+                                <p className="text-sm font-bold">Google Play</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Footer */}
             <footer className="py-12 border-t border-white/10">
                 <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">

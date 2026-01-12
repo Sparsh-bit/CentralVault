@@ -97,6 +97,23 @@ export default function Dashboard() {
             }
         };
         checkUser();
+
+        // REAL-TIME SYNC: Listen for changes in the 'resources' table
+        // This ensures the Web and Mobile apps stay in sync instantly
+        const channel = supabase
+            .channel('realtime:resources')
+            .on('postgres_changes', {
+                event: '*',
+                schema: 'public',
+                table: 'resources'
+            }, () => {
+                fetchResources(); // Refresh data on any change
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
     }, []);
 
     const fetchResources = async () => {
@@ -259,6 +276,12 @@ export default function Dashboard() {
                         <SidebarItem icon={<Archive size={20} />} label="Archives" active={activeTab === 'archived'} onClick={() => { setActiveTab('archived'); setIsSidebarOpen(false); }} />
                         <SidebarItem icon={<Trash2 size={20} />} label="Trash" active={activeTab === 'trash'} onClick={() => { setActiveTab('trash'); setIsSidebarOpen(false); }} />
                     </nav>
+
+                    <div className="mb-6 p-4 bg-indigo-600/10 border border-indigo-500/20 rounded-2xl">
+                        <p className="text-[10px] font-black uppercase text-indigo-400 mb-1 tracking-widest">Mobile Vault</p>
+                        <p className="text-xs text-gray-400 leading-relaxed mb-3">Get the full experience on Android and iOS.</p>
+                        <button className="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase rounded-lg transition-colors">Download App</button>
+                    </div>
 
                     <div className="mt-auto pt-6 border-t border-white/5">
                         <div className="flex items-center gap-3 p-3 bg-white/5 rounded-2xl">
