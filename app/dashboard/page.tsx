@@ -16,7 +16,7 @@ import { DetailModal } from '@/app/components/DetailModal';
 import {
     Search, Plus, LayoutGrid, LayoutList, LogOut,
     Link as LinkIcon, FileText, CheckSquare,
-    Star, Archive, Inbox, Filter, ChevronDown, X, Trash2, Menu
+    Star, Archive, Inbox, Filter, ChevronDown, X, Trash2, Menu, Monitor
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import type { Resource, ResourceType } from '@/lib/types';
@@ -278,10 +278,25 @@ export default function Dashboard() {
                         <SidebarItem icon={<Trash2 size={20} />} label="Trash" active={activeTab === 'trash'} onClick={() => { setActiveTab('trash'); setIsSidebarOpen(false); }} />
                     </nav>
 
-                    <div className="mb-6 p-4 bg-indigo-600/10 border border-indigo-500/20 rounded-2xl">
-                        <p className="text-[10px] font-black uppercase text-indigo-400 mb-1 tracking-widest">Mobile Vault</p>
-                        <p className="text-xs text-gray-400 leading-relaxed mb-3">Get the full experience on Android and iOS.</p>
-                        <button className="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase rounded-lg transition-colors">Download App</button>
+                    <div className="mb-6 space-y-3">
+                        <div className="p-4 bg-indigo-600/10 border border-indigo-500/20 rounded-2xl">
+                            <p className="text-[10px] font-black uppercase text-indigo-400 mb-1 tracking-widest">Mobile Vault</p>
+                            <p className="text-xs text-gray-400 leading-relaxed mb-3">Get the full experience on Android and iOS.</p>
+                            <button className="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase rounded-lg transition-colors">Download App</button>
+                        </div>
+
+                        <div className="p-4 bg-purple-600/10 border border-purple-500/20 rounded-2xl">
+                            <p className="text-[10px] font-black uppercase text-purple-400 mb-1 tracking-widest flex items-center gap-2">
+                                <Monitor size={10} /> Windows Companion
+                            </p>
+                            <p className="text-xs text-gray-400 leading-relaxed mb-3">Native desktop performance and deep integration.</p>
+                            <a
+                                href="/downloads/CentralVault-Setup.exe"
+                                className="block w-full py-2 bg-purple-600 hover:bg-purple-500 text-white text-center text-[10px] font-black uppercase rounded-lg transition-colors"
+                            >
+                                Download .exe
+                            </a>
+                        </div>
                     </div>
 
                     <div className="mt-auto pt-6 border-t border-white/5">

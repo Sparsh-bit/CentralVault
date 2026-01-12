@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'edge';
 
 import Link from 'next/link';
-import { ArrowRight, Vault, Share2, Zap, Lock, Database } from 'lucide-react';
+import { ArrowRight, Vault, Share2, Zap, Lock, Database, Monitor } from 'lucide-react';
 import nextDynamic from 'next/dynamic';
 import { GlowingCard } from './components/GlowingCard';
 import { useState, useEffect } from 'react';
@@ -87,6 +87,20 @@ export default function LandingPage() {
                                 See Demo
                             </Link>
                         </div>
+
+                        <div className="flex items-center gap-6 pt-8 border-t border-white/5">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black uppercase text-purple-400 tracking-widest mb-2">Desktop Client</span>
+                                <a
+                                    href="/downloads/CentralVault-Setup.exe"
+                                    className="flex items-center gap-2 text-white hover:text-purple-400 transition-colors text-sm font-bold group"
+                                >
+                                    <Monitor className="w-4 h-4" />
+                                    Download for Windows
+                                    <span className="text-[10px] bg-white/5 px-2 py-0.5 rounded border border-white/10 group-hover:border-purple-500/30 transition-colors">.exe</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Visual/Spline Placeholder (or just space for the 3D background to shine) */}
@@ -120,10 +134,10 @@ export default function LandingPage() {
                         </div>
                     </div>
                 </div>
-            </main>
+            </main >
 
             {/* Features Grid */}
-            <section className="py-24 border-t border-white/5 bg-black/50">
+            < section className="py-24 border-t border-white/5 bg-black/50" >
                 <div className="max-w-7xl mx-auto px-6">
                     <h2 className="text-3xl font-bold text-center mb-16">Intelligence Built In</h2>
                     <div className="grid md:grid-cols-3 gap-8">
@@ -152,10 +166,10 @@ export default function LandingPage() {
                         </GlowingCard>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Mobile App Section */}
-            <section className="py-24 relative overflow-hidden">
+            < section className="py-24 relative overflow-hidden" >
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-indigo-600/10 rounded-full blur-[120px] -z-10" />
                 <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-8">
@@ -187,15 +201,15 @@ export default function LandingPage() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Footer */}
-            <footer className="py-12 border-t border-white/10">
+            < footer className="py-12 border-t border-white/10" >
                 <div className="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
                     © 2026 CentralVault. All systems operational.
                 </div>
-            </footer>
-        </div>
+            </footer >
+        </div >
     );
 }
 
