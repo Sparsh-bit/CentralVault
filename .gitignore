@@ -57,3 +57,10 @@ supabase/.temp
 # OS
 Thumbs.db
 .DS_Store
+
+# Android
+android/app/build/
+android/.gradle/
+android/capacitor-cordova-android-plugins/build/
+*.apk
+*.aab

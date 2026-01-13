@@ -13,9 +13,12 @@ import { DetailModal } from '@/app/components/DetailModal';
 import {
     Search, Plus, LayoutGrid, LayoutList, LogOut,
     Link as LinkIcon, FileText, CheckSquare,
-    Star, Archive, Inbox, Filter, ChevronDown, X, Trash2, Menu, Monitor
+    Star, Archive, Inbox, Filter, ChevronDown, X, Trash2, Menu, Monitor,
+    Video, Smartphone, StickyNote
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { GlassFolder } from '@/app/components/ui/GlassFolder';
+import { Dock } from '@/app/components/ui/Dock';
 import type { Resource, ResourceType } from '@/lib/types';
 
 type SidebarTab = 'all' | 'favorites' | 'archived' | 'trash';
@@ -44,6 +47,7 @@ export default function Dashboard() {
     // Search & Filter
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [selectedType, setSelectedType] = useState<ResourceType | 'all'>('all');
     const [syncStatus, setSyncStatus] = useState<'synced' | 'error' | 'syncing'>('syncing');
     const [errorDetails, setErrorDetails] = useState<string | null>(null);
 
@@ -232,16 +236,23 @@ export default function Dashboard() {
     const filteredResources = resources.filter(r => {
         const matchesSearch = r.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
             r.content?.toLowerCase().includes(searchTerm.toLowerCase());
+
+        // GLOBAL SEARCH: Ignore current tab/status if searching
+        if (searchTerm && searchTerm.trim() !== '') {
+            return matchesSearch;
+        }
+
         const matchesCategory = selectedCategory === 'All' || r.category === selectedCategory;
+        const matchesType = selectedType === 'all' || r.type === selectedType;
         const isDeleted = !!r.deleted_at;
 
         if (activeTab === 'trash') return matchesSearch && isDeleted;
         if (isDeleted) return false;
 
-        if (activeTab === 'favorites') return matchesSearch && matchesCategory && r.is_favorite && !r.is_archived;
-        if (activeTab === 'archived') return matchesSearch && matchesCategory && r.is_archived;
+        if (activeTab === 'favorites') return matchesSearch && matchesCategory && matchesType && r.is_favorite && !r.is_archived;
+        if (activeTab === 'archived') return matchesSearch && matchesCategory && matchesType && r.is_archived;
 
-        return matchesSearch && matchesCategory && !r.is_archived;
+        return matchesSearch && matchesCategory && matchesType && !r.is_archived;
     });
 
     const categories = ['All', ...Array.from(new Set(resources.filter(r => !r.deleted_at).map(r => r.category || 'Uncategorized')))];
@@ -397,6 +408,46 @@ export default function Dashboard() {
                         </div>
                     )}
 
+                    {/* Main Categories / Glass Folders */}
+                    {!searchTerm && activeTab === 'all' && (
+                        <div className="mb-8 overflow-x-auto pb-4">
+                            <h3 className="text-lg font-bold mb-4 px-2">Library</h3>
+                            <div className="flex gap-6 px-2 min-w-max">
+                                <GlassFolder
+                                    label="Reels & Videos"
+                                    icon={<Video className="w-8 h-8 text-pink-400" />}
+                                    itemCount={resources.filter(r => r.category === 'Video').length}
+                                    color="bg-pink-500"
+                                    onClick={() => { setSelectedCategory('Video'); setSelectedType('all'); }}
+                                />
+                                <GlassFolder
+                                    label="Notes & Docs"
+                                    icon={<StickyNote className="w-8 h-8 text-yellow-400" />}
+                                    itemCount={resources.filter(r => r.type === 'note').length}
+                                    color="bg-yellow-500"
+                                    onClick={() => {
+                                        setSelectedType('note');
+                                        setSelectedCategory('All');
+                                    }}
+                                />
+                                <GlassFolder
+                                    label="Social"
+                                    icon={<Smartphone className="w-8 h-8 text-blue-400" />}
+                                    itemCount={resources.filter(r => r.category === 'Social').length}
+                                    color="bg-blue-500"
+                                    onClick={() => { setSelectedCategory('Social'); setSelectedType('all'); }}
+                                />
+                                <GlassFolder
+                                    label="Archives"
+                                    icon={<Archive className="w-8 h-8 text-purple-400" />}
+                                    itemCount={resources.filter(r => r.is_archived).length}
+                                    color="bg-purple-500"
+                                    onClick={() => setActiveTab('archived')}
+                                />
+                            </div>
+                        </div>
+                    )}
+
                     {loading ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
                             {[1, 2, 3, 4, 5, 6].map(i => <div key={i} className="h-64 bg-white/5 rounded-[32px] animate-pulse" />)}
@@ -426,16 +477,16 @@ export default function Dashboard() {
                     )}
                 </div>
 
-                {/* Mobile Bottom Navigation (Hidden on Desktop) */}
-                <nav className="fixed bottom-0 inset-x-0 h-16 bg-[#0a0a1a]/90 backdrop-blur-2xl border-t border-white/5 flex items-center justify-around px-4 lg:hidden z-50">
-                    <NavIcon icon={<Inbox size={20} />} active={activeTab === 'all'} onClick={() => setActiveTab('all')} />
-                    <NavIcon icon={<Star size={20} />} active={activeTab === 'favorites'} onClick={() => setActiveTab('favorites')} />
-                    <div className="mb-8 w-14 h-14 bg-indigo-600 rounded-full flex items-center justify-center shadow-2xl shadow-indigo-600/40 border-4 border-[#050511]" onClick={() => setShowAddModal(true)}>
-                        <Plus size={24} className="text-white" />
-                    </div>
-                    <NavIcon icon={<Archive size={20} />} active={activeTab === 'archived'} onClick={() => setActiveTab('archived')} />
-                    <NavIcon icon={<Trash2 size={20} />} active={activeTab === 'trash'} onClick={() => setActiveTab('trash')} />
-                </nav>
+                {/* Dock Navigation (Replaces standard bottom nav) */}
+                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+                    <Dock items={[
+                        { icon: <Inbox size={20} />, label: 'Home', isActive: activeTab === 'all', onClick: () => { setActiveTab('all'); setSelectedCategory('All'); setSelectedType('all'); } },
+                        { icon: <Star size={20} />, label: 'Favorites', isActive: activeTab === 'favorites', onClick: () => setActiveTab('favorites') },
+                        { icon: <Plus size={24} />, label: 'New', onClick: () => setShowAddModal(true) },
+                        { icon: <Archive size={20} />, label: 'Archives', isActive: activeTab === 'archived', onClick: () => setActiveTab('archived') },
+                        { icon: <Trash2 size={20} />, label: 'Trash', isActive: activeTab === 'trash', onClick: () => setActiveTab('trash') },
+                    ]} />
+                </div>
             </main>
 
             {/* Modals (Responsive: Full Screen on Mobile) */}

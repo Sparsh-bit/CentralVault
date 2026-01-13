@@ -23,18 +23,18 @@ export default function LandingPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black pointer-events-none -z-10" />
 
             {/* Navbar */}
-            <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/50 backdrop-blur-md">
+            <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-black/80 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 bg-gradient-to-tr from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20">
-                            <Vault className="w-6 h-6 text-white" />
+                        <div className="w-10 h-10 bg-gradient-to-tr from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20 border border-white/20">
+                            <Vault className="w-6 h-6 text-white drop-shadow-lg" />
                         </div>
                         <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
                             CentralVault
                         </span>
                     </div>
                     <div className="flex items-center gap-6">
-                        <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors px-4 py-2.5 rounded-full border border-white/10 hover:border-white/20 hover:bg-white/5">
                             Sign In
                         </Link>
                         <Link

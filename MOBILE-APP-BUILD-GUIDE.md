@@ -12,8 +12,32 @@ Before starting, ensure you have:
 
 1. **Node.js** installed (v18 or higher)
 2. **Android Studio** installed ([Download here](https://developer.android.com/studio))
-3. **Java JDK** (comes with Android Studio)
+3. **Java JDK 17** (comes with Android Studio, or download separately from [Adoptium](https://adoptium.net/))
 4. **Android SDK** (installed via Android Studio)
+5. **JAVA_HOME environment variable** set to your JDK installation path
+
+### Java Setup Verification
+
+After installing Java, verify the setup:
+
+```bash
+java -version
+```
+
+Should output something like:
+```
+openjdk version "17.0.9" 2023-10-17
+OpenJDK Runtime Environment Temurin-17.0.9+9 (build 17.0.9+9)
+OpenJDK 64-Bit Server VM Temurin-17.0.9+9 (build 17.0.9+9, mixed mode, sharing)
+```
+
+And check JAVA_HOME:
+
+```bash
+echo $JAVA_HOME
+```
+
+Should point to your JDK directory.
 
 ---
 
@@ -271,6 +295,29 @@ npx cap update android
 cd android && ./gradlew clean && cd ..
 npx cap sync android
 ```
+
+---
+
+## 🚀 CI/CD with GitHub Actions
+
+This project includes automated Android builds using GitHub Actions. Every push to main/master triggers:
+
+- Next.js build
+- Capacitor sync
+- Android APK generation
+- Artifact upload for download
+
+### Accessing Build Artifacts
+
+1. Go to your repository's **Actions** tab
+2. Click on the latest workflow run
+3. Download the `android-apk` artifact
+4. Install the APK on your Android device
+
+### Local vs CI Builds
+
+- **Local**: Use Android Studio for development and debugging
+- **CI**: Automated builds for distribution and testing
 
 ---
 
